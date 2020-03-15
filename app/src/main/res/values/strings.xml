@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">HabitTracker</string>
+    <string name="habit_name">Habit name</string>
+    <string name="description">Description</string>
+
+    <string-array name="priority_array">
+        <item>High</item>
+        <item>Middle</item>
+        <item>Low</item>
+    </string-array>
 </resources>
+
+
