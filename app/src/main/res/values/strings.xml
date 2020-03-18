@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">HabitTracker</string>
+    <string name="habit_name">Habit name</string>
+    <string name="description">Description</string>
+    <string name="periodicity">Periodicity</string>
+    <string name="save">Save</string>
+    <string name="bad">Bad</string>
+    <string name="good">Good</string>
+    <string name="times">Times</string>
+    <string name="per">Per</string>
+    <string name="type">Type:</string>
+    <string name="priority">Priority:</string>
+    <string name="description_text">Description:</string>
+    <string name="times_per">times per</string>
+
+    <string-array name="priority_array">
+        <item>High</item>
+        <item>Middle</item>
+        <item>Low</item>
+    </string-array>
 </resources>
+
+
