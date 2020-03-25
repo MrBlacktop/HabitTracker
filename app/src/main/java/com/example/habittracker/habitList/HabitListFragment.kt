@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.habittracker.R
 import com.example.habittracker.databinding.HabitListFragmentBinding
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.habit_list_fragment.*
 
 class HabitListFragment : Fragment() {
 
@@ -20,37 +23,38 @@ class HabitListFragment : Fragment() {
     }
 
     private lateinit var viewModel: HabitListViewModel
-    private lateinit var adapter: HabitAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding: HabitListFragmentBinding =
-            DataBindingUtil.inflate(inflater, R.layout.habit_list_fragment, container, false)
 
         viewModel = ViewModelProviders.of(this).get(HabitListViewModel::class.java)
 
-        binding.fab.setOnClickListener() {
-            this.findNavController()
-                .navigate(HabitListFragmentDirections.actionHabitListFragmentToHabitFragment())
-        }
 
 
-        adapter =
-            HabitAdapter(HabitAdapter.HabitListener {
-                findNavController().navigate(HabitListFragmentDirections.actionHabitListFragmentToHabitFragment())
-            })
-        binding.habitList.layoutManager = LinearLayoutManager(context)
-        binding.habitList.adapter = adapter
 
-        viewModel.habits.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.data = it
+
+
+        return inflater.inflate(R.layout.habit_list_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let { activity ->
+            habitViewPager.adapter = ViewPagerAdapter(activity as AppCompatActivity)
+            TabLayoutMediator(tab_layout, habitViewPager) { tab, position ->
+                when(position){
+                    0 -> tab.text = "Good"
+                    else -> tab.text = "Bad"
+                }
+            }.attach()
+
+            fab.setOnClickListener() {
+                this.findNavController()
+                    .navigate(R.id.action_habitListFragment_to_habitFragment)
             }
-        })
-
-        return binding.root
+        }
     }
 }

@@ -13,7 +13,10 @@
             app:destination="@id/habitFragment" />
         <action
             android:id="@+id/action_habitListFragment_to_habitFragment2"
-            app:destination="@id/habitFragment" />
+            app:destination="@id/habitFragment" >
+            <argument
+                android:name="index" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/habitFragment"
@@ -22,10 +25,23 @@
         <action
             android:id="@+id/action_habitFragment_to_habitListFragment"
             app:destination="@id/habitListFragment" />
+        <argument
+            android:name="index"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.habittracker.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.habittracker.habitList.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_habitFragment"
+            app:destination="@id/habitFragment" />
+    </fragment>
 </navigation>

@@ -10,20 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/habitList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pager"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            
+
             <com.google.android.material.tabs.TabLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </androidx.viewpager2.widget.ViewPager2>
+                android:layout_height="wrap_content"
+                android:id="@+id/tab_layout"/>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/habitViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
