@@ -74,10 +74,10 @@ class HabitActivity : AppCompatActivity() {
 
     companion object {
         const val KEY = "INDEX"
-        fun getIntentWithExtra(index: Int, context: Context) =
-            Intent(context, HabitActivity::class.java).apply {
-                putExtra(KEY, index)
-            }
+//        fun getIntentWithExtra(index: Int, context: Context) =
+//            Intent(context, HabitActivity::class.java).apply {
+//                putExtra(KEY, index)
+//            }
 
         fun getIntent(context: Context) = Intent(context, HabitActivity::class.java)
     }
