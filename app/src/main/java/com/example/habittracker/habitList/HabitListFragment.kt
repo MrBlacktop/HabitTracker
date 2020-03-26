@@ -29,8 +29,7 @@ class HabitListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
-        viewModel = ViewModelProviders.of(this).get(HabitListViewModel::class.java)
+      viewModel = ViewModelProviders.of(this).get(HabitListViewModel::class.java)
 
 
 

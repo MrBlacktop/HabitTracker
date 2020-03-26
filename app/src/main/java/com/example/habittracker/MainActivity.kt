@@ -16,34 +16,31 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var appBarConfiguration : AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-        NavigationUI.setupActionBarWithNavController(this,navController,drawerLayout)
+        val navController = this.findNavController(R.id.nav_host_fragment)
+        NavigationUI.setupActionBarWithNavController(this,navController,drawer_layout)
 
-        appBarConfiguration = AppBarConfiguration(navController.graph,drawerLayout)
 
 
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
             if (nd.id == nc.graph.startDestination) {
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             } else {
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
         }
-        NavigationUI.setupWithNavController(findViewById<NavigationView>(R.id.nav_view), navController)
+        NavigationUI.setupWithNavController(nav_view, navController)
 
 
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-        return NavigationUI.navigateUp(navController,appBarConfiguration)
+        val navController = this.findNavController(R.id.nav_host_fragment)
+        return NavigationUI.navigateUp(navController,drawer_layout)
     }
 
     companion object{
