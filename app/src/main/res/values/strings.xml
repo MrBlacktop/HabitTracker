@@ -12,12 +12,17 @@
     <string name="priority">Priority:</string>
     <string name="description_text">Description:</string>
     <string name="times_per">times per</string>
+    <string name="add_new_habit">Add a new habit</string>
 
     <string-array name="priority_array">
         <item>High</item>
         <item>Middle</item>
         <item>Low</item>
     </string-array>
+
+    <string name="hello_blank_fragment">This is habits tracker :)</string>
+    <string name="about">About</string>
+    <string name="habit_list">Habit list</string>
 </resources>
 
 
