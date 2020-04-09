@@ -1,12 +1,14 @@
-package com.example.habittracker.habitList
+package com.example.habittracker.habitList.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.example.habittracker.Habit
+import com.example.habittracker.database.Habit
 import com.example.habittracker.databinding.ListItemHabitBinding
 
-class   HabitAdapter(private val clickListener: HabitListener) :
+class HabitAdapter(private val clickListener: HabitListener) :
     RecyclerView.Adapter<HabitAdapter.ViewHolder>() {
     var data = listOf<Habit>()
         set(value) {
@@ -15,7 +17,9 @@ class   HabitAdapter(private val clickListener: HabitListener) :
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(
+            parent
+        )
 
     }
 
@@ -38,7 +42,7 @@ class   HabitAdapter(private val clickListener: HabitListener) :
         ) {
             binding.habit = item
             itemView.setOnClickListener {
-                clickListener.onClick(position)
+                clickListener.onClick(item.id)
             }
         }
 
@@ -47,14 +51,16 @@ class   HabitAdapter(private val clickListener: HabitListener) :
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemHabitBinding.inflate(layoutInflater, parent, false)
 
-                return ViewHolder(binding)
+                return ViewHolder(
+                    binding
+                )
             }
         }
 
 
     }
 
-    class HabitListener(val clickListener: (habitId: Int) -> Unit) {
-        fun onClick(habitPosition: Int) = clickListener(habitPosition)
+    class HabitListener(val clickListener: (habitId: Long) -> Unit) {
+        fun onClick(habitPosition: Long) = clickListener(habitPosition)
     }
 }

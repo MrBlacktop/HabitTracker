@@ -6,7 +6,7 @@
     <data>
         <variable
             name="habit"
-            type="com.example.habittracker.Habit" />
+            type="com.example.habittracker.database.Habit" />
     </data>
 
 
@@ -48,7 +48,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/Type"
             app:layout_constraintTop_toBottomOf="@+id/priority"
-            android:text="@{habit.type}"
+            android:text="@{habit.type.toString()}"
             tools:text="Habbit Type" />
 
         <TextView

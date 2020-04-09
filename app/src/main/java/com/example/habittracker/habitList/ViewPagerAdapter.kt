@@ -3,6 +3,7 @@ package com.example.habittracker.habitList
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.habittracker.habitList.list.ListFragment
 
 class ViewPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = 2

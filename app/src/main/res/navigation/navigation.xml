@@ -27,8 +27,8 @@
             app:destination="@id/habitListFragment" />
         <argument
             android:name="index"
-            app:argType="integer"
-            android:defaultValue="0" />
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -37,7 +37,7 @@
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.habittracker.habitList.ListFragment"
+        android:name="com.example.habittracker.habitList.list.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
