@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.habittracker.database.HabitDatabase
 import com.example.habittracker.habitList.list.ListViewModel
@@ -21,7 +22,7 @@ private lateinit var viewModel: ListViewModel
         val application = requireNotNull(this.activity).application
         val dataSource = HabitDatabase.getInstance(application).habitDatabaseDao
         val viewModelFactory = ListViewModelFactory(dataSource)
-        viewModel = ViewModelProviders.of(requireActivity(),viewModelFactory).get(ListViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(),viewModelFactory).get(ListViewModel::class.java)
     }
 
     override fun onCreateView(

@@ -11,6 +11,7 @@ import android.widget.RadioButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.habittracker.database.Habit
 import com.example.habittracker.MainActivity
@@ -50,9 +51,7 @@ class HabitFragment : Fragment() {
             null
 
         val viewModelFactory = HabitViewModelFactory(dataSource,id)
-
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HabitViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(HabitViewModel::class.java)
 
         return inflater.inflate(R.layout.habit_fragment, container, false)
     }

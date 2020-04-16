@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,9 +32,10 @@ class ListFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = HabitDatabase.getInstance(application).habitDatabaseDao
+        
         val viewModelFactory = ListViewModelFactory(dataSource)
-        viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory)
-            .get(ListViewModel::class.java)
+        viewModel =
+            ViewModelProvider(requireActivity(), viewModelFactory).get(ListViewModel::class.java)
 
     }
 

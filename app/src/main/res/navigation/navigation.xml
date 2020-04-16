@@ -13,9 +13,8 @@
             app:destination="@id/habitFragment" />
         <action
             android:id="@+id/action_habitListFragment_to_habitFragment2"
-            app:destination="@id/habitFragment" >
-            <argument
-                android:name="index" />
+            app:destination="@id/habitFragment">
+            <argument android:name="index" />
         </action>
     </fragment>
     <fragment
