@@ -23,6 +23,8 @@
     <string name="hello_blank_fragment">This is habits tracker :)</string>
     <string name="about">About</string>
     <string name="habit_list">Habit list</string>
+    <string name="filters_and_sorts">Filters and sorts</string>
+    <string name="search">Search</string>
 </resources>
 
 
