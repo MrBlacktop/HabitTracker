@@ -14,6 +14,7 @@ class HabitViewModel(dataSource: HabitDatabaseDao, habitId: Long? = null) : View
     val database: HabitDatabaseDao = dataSource
     private var isNewHabit = true
 
+    private val uiScope = CoroutineScope(Dispatchers.Main)
 
     init {
         if (habitId != null) {
@@ -29,12 +30,15 @@ class HabitViewModel(dataSource: HabitDatabaseDao, habitId: Long? = null) : View
 
 
     fun saveButtonClicked() {
-
-        if (isNewHabit)
-            database.insert(currentHabit)
-        else
-            database.update(currentHabit)
-        _navigateToHabitList.value = true
+        uiScope.launch {
+            withContext(Dispatchers.IO){
+                if (isNewHabit)
+                database.insert(currentHabit)
+                else
+                database.update(currentHabit)
+            }
+            _navigateToHabitList.value = true
+        }
     }
 
 
