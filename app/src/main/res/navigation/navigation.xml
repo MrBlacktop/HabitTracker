@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/habitFragment"
-        android:name="com.example.habittracker.habit.HabitFragment"
+        android:name="com.example.habittracker.habitEditor.HabitEditorFragment"
         android:label="Habit" >
         <action
             android:id="@+id/action_habitFragment_to_habitListFragment"

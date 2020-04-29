@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.habittracker.R
 import com.example.habittracker.database.HabitDatabase
 import com.example.habittracker.database.HabitType
-import com.example.habittracker.habit.HabitFragment
+import com.example.habittracker.habitEditor.HabitEditorFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 
 private const val ARG_PARAM = "habitType"
@@ -46,7 +45,7 @@ class ListFragment : Fragment() {
                 HabitAdapter.HabitListener {
                     this.findNavController().navigate(
                         R.id.action_habitListFragment_to_habitFragment,
-                        HabitFragment.createBundleWithIndex(it)
+                        HabitEditorFragment.createBundleWithIndex(it)
                     )
                 })
 

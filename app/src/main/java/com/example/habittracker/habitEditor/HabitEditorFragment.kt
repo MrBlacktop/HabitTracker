@@ -1,6 +1,5 @@
-package com.example.habittracker.habit
+package com.example.habittracker.habitEditor
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,19 +8,16 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import androidx.core.os.bundleOf
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.habittracker.database.Habit
-import com.example.habittracker.MainActivity
 
 import com.example.habittracker.R
 import com.example.habittracker.database.HabitDatabase
 import com.example.habittracker.database.HabitType
-import kotlinx.android.synthetic.main.habit_fragment.*
+import kotlinx.android.synthetic.main.habit_editor_fragment.*
 
-class HabitFragment : Fragment() {
+class HabitEditorFragment : Fragment() {
 
     companion object {
         private const val HABIT_INDEX = "HABIT_INDEX"
@@ -30,7 +26,7 @@ class HabitFragment : Fragment() {
         }
     }
 
-    private lateinit var viewModel: HabitViewModel
+    private lateinit var viewModel: HabitEditorViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,17 +39,17 @@ class HabitFragment : Fragment() {
 
 
         val args = requireArguments()
-        var id: Long?
+        val id: Long?
 
         id = if(args.containsKey(HABIT_INDEX))
             args.getLong(HABIT_INDEX)
         else
             null
 
-        val viewModelFactory = HabitViewModelFactory(dataSource,id)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(HabitViewModel::class.java)
+        val viewModelFactory = HabitEditorViewModelFactory(dataSource,id)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(HabitEditorViewModel::class.java)
 
-        return inflater.inflate(R.layout.habit_fragment, container, false)
+        return inflater.inflate(R.layout.habit_editor_fragment, container, false)
     }
 
 
