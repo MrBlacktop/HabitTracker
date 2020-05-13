@@ -1,9 +1,7 @@
-package com.example.habittracker.habitList.list
+package com.example.habittracker.habitList.list.recyclerView
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.habittracker.database.Habit
 import com.example.habittracker.databinding.ListItemHabitBinding
@@ -42,7 +40,7 @@ class HabitAdapter(private val clickListener: HabitListener) :
         ) {
             binding.habit = item
             itemView.setOnClickListener {
-                clickListener.onClick(item.id)
+                clickListener.onClick(item.uid)
             }
         }
 
@@ -56,11 +54,9 @@ class HabitAdapter(private val clickListener: HabitListener) :
                 )
             }
         }
-
-
     }
 
-    class HabitListener(val clickListener: (habitId: Long) -> Unit) {
-        fun onClick(habitPosition: Long) = clickListener(habitPosition)
+    class HabitListener(val clickListener: (habitId: String) -> Unit) {
+        fun onClick(habitPosition: String) = clickListener(habitPosition)
     }
 }

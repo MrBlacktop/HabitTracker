@@ -21,7 +21,7 @@ private lateinit var viewModel: ListViewModel
         super.onCreate(savedInstanceState)
         val application = requireNotNull(this.activity).application
         val dataSource = HabitDatabase.getInstance(application).habitDatabaseDao
-        val viewModelFactory = ListViewModelFactory(dataSource)
+        val viewModelFactory = ListViewModelFactory(dataSource,getString(R.string.webToken))
         viewModel = ViewModelProvider(requireActivity(),viewModelFactory).get(ListViewModel::class.java)
     }
 

@@ -15,13 +15,16 @@ interface HabitDatabaseDao {
     @Delete
     fun delete(habit: Habit)
 
-    @Query("SELECT * FROM habit WHERE id = :key")
-    fun get(key: Long):Habit
+    @Query("SELECT * FROM habit WHERE uid = :uid")
+    fun get(uid: String):Habit
 
-    @Query("SELECT * FROM habit ORDER BY id")
+    @Query("SELECT * FROM habit ORDER BY date")
     fun getAllHabits() : LiveData<List<Habit>>
 
-    @Query("SELECT * FROM habit WHERE name LIKE :filter + '%'")
+    @Query("SELECT * FROM habit WHERE title LIKE :filter + '%'")
     fun getHabitsFilteredByName(filter: String): LiveData<List<Habit>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(habits: List<Habit>)
 
 }

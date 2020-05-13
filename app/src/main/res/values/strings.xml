@@ -6,7 +6,7 @@
     <string name="save">Save</string>
     <string name="bad">Bad</string>
     <string name="good">Good</string>
-    <string name="times">Times</string>
+    <string name="count">Count</string>
     <string name="per">Per</string>
     <string name="type">Type:</string>
     <string name="priority">Priority:</string>
@@ -25,6 +25,10 @@
     <string name="habit_list">Habit list</string>
     <string name="filters_and_sorts">Filters and sorts</string>
     <string name="search">Search</string>
+    <string name="webToken">9b154c53-2ef2-4e9d-9a93-16b3d9218a59</string>
+    <string name="days">Days</string>
+    <string name="repeat">Repeat</string>
+    <string name="in">In</string>
 </resources>
 
 

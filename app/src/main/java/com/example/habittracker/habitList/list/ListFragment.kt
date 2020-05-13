@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import com.example.habittracker.R
 import com.example.habittracker.database.HabitDatabase
 import com.example.habittracker.database.HabitType
 import com.example.habittracker.habitEditor.HabitEditorFragment
+import com.example.habittracker.habitList.list.recyclerView.HabitAdapter
 import kotlinx.android.synthetic.main.fragment_list.*
 
 private const val ARG_PARAM = "habitType"
@@ -32,7 +34,7 @@ class ListFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = HabitDatabase.getInstance(application).habitDatabaseDao
         
-        val viewModelFactory = ListViewModelFactory(dataSource)
+        val viewModelFactory = ListViewModelFactory(dataSource,getString(R.string.webToken))
         viewModel =
             ViewModelProvider(requireActivity(), viewModelFactory).get(ListViewModel::class.java)
 
@@ -64,6 +66,11 @@ class ListFragment : Fragment() {
 
         viewModel.textSort.observe(viewLifecycleOwner, Observer {
             adapter.data = viewModel.getFilteredHabits(habitsType!!)
+        })
+
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
+            if(it)
+                Toast.makeText(context,"Network Error", Toast.LENGTH_SHORT).show()
         })
 
 

@@ -26,7 +26,7 @@
             app:destination="@id/habitListFragment" />
         <argument
             android:name="index"
-            app:argType="long"
+            app:argType="string"
             android:defaultValue="0L" />
     </fragment>
     <fragment
