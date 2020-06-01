@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="habit"
+            type="com.example.domain.Habit" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/primaryLightColor">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+
+            <TextView
+                android:id="@+id/habitName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{habit.title}"
+                android:textColor="@color/secondaryTextColor"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/habit_name" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{habit.description}"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintStart_toEndOf="@+id/DescriptionText"
+                app:layout_constraintTop_toBottomOf="@+id/habitName"
+                tools:text="@string/description" />
+
+            <TextView
+                android:id="@+id/habitType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{habit.type.name()}"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintStart_toEndOf="@+id/Type"
+                app:layout_constraintTop_toBottomOf="@+id/priority"
+                tools:text="Habbit Type" />
+
+            <TextView
+                android:id="@+id/priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{habit.priority.toString()}"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintStart_toEndOf="@+id/priorityText"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                tools:text="Priority" />
+
+            <TextView
+                android:id="@+id/times"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{String.valueOf(habit.count)}"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/Type"
+                app:layout_constraintTop_toBottomOf="@+id/Type"
+                tools:text="@string/count" />
+
+            <TextView
+                android:id="@+id/periodicity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{String.valueOf(habit.frequency)}"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintStart_toEndOf="@+id/PerText"
+                app:layout_constraintTop_toBottomOf="@+id/habitType"
+                tools:text="@string/periodicity" />
+
+            <TextView
+                android:id="@+id/DescriptionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/description_text"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/habitName" />
+
+            <TextView
+                android:id="@+id/priorityText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/priority"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintStart_toStartOf="@+id/DescriptionText"
+                app:layout_constraintTop_toBottomOf="@+id/DescriptionText" />
+
+            <TextView
+                android:id="@+id/Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/type"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintStart_toStartOf="@+id/priorityText"
+                app:layout_constraintTop_toBottomOf="@+id/priorityText" />
+
+            <TextView
+                android:id="@+id/PerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/times_per"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintStart_toEndOf="@+id/times"
+                app:layout_constraintTop_toBottomOf="@+id/habitType" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
