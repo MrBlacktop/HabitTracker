@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">HabitTracker</string>
+    <string name="habit_name">Habit name</string>
+    <string name="description">Description</string>
+    <string name="periodicity">Periodicity</string>
+    <string name="save">Save</string>
+    <string name="bad">Bad</string>
+    <string name="good">Good</string>
+    <string name="count">Count</string>
+    <string name="per">Per</string>
+    <string name="type">Type:</string>
+    <string name="priority">Priority:</string>
+    <string name="description_text">Description:</string>
+    <string name="times_per">times per</string>
+    <string name="add_new_habit">Add a new habit</string>
+
+    <string-array name="priority_array">
+        <item>Low</item>
+        <item>Middle</item>
+        <item>High</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">This is habits tracker :)</string>
+    <string name="about">About</string>
+    <string name="habit_list">Habit list</string>
+    <string name="filters_and_sorts">Filters and sorts</string>
+    <string name="search">Search</string>
+    <string name="webToken">9b154c53-2ef2-4e9d-9a93-16b3d9218a59</string>
+    <string name="days">Days</string>
+    <string name="repeat">Repeat</string>
+    <string name="in">In</string>
+</resources>
+
+
