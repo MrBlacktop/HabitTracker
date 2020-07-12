@@ -16,4 +16,7 @@ interface HabitApiService {
 
     @HTTP(method = "DELETE",path = "habit", hasBody = true)
     fun deleteHabit(@Header("Authorization") token: String, @Body uid: String)
+
+    @POST("habit_done")
+    fun completeHabitAsync(@Header("Authorization") token: String, @Body habitDone: HabitDone): Deferred<Respond?>
 }

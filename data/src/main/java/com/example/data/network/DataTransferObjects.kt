@@ -3,6 +3,7 @@ package com.example.data.network
 import com.example.data.database.HabitDbModel
 import com.example.domain.HabitType
 import com.example.domain.Priority
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
@@ -37,4 +38,17 @@ fun List<HabitWebModel>.asDatabaseModel(): List<HabitDbModel>{
 @JsonClass(generateAdapter = true)
 data class Uid(
     var uid: String
+)
+
+@JsonClass(generateAdapter = true)
+data class HabitDone(
+    var date:Int,
+    @Json(name = "habit_uid")
+    var habitUid: String
+)
+
+@JsonClass(generateAdapter = true)
+data class Respond(
+    var code: Int,
+    var message: String
 )

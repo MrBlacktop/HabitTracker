@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.Habit
 import com.example.habittracker.databinding.ListItemHabitBinding
 
-class HabitAdapter(private val clickListener: HabitListener) :
+class HabitAdapter(
+    private val clickListener: HabitListener,
+    private val habitCompleteListener: HabitCompleteListener
+) :
     RecyclerView.Adapter<HabitAdapter.ViewHolder>() {
     var data = listOf<Habit>()
         set(value) {
@@ -25,7 +28,7 @@ class HabitAdapter(private val clickListener: HabitListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        holder.bind(item, position, clickListener)
+        holder.bind(item, clickListener, habitCompleteListener)
 
 
     }
@@ -35,12 +38,17 @@ class HabitAdapter(private val clickListener: HabitListener) :
 
         fun bind(
             item: Habit,
-            position: Int,
-            clickListener: HabitListener
+            clickListener: HabitListener,
+            habitCompleteListener: HabitCompleteListener
         ) {
             binding.habit = item
-            itemView.setOnClickListener {
+
+            binding.root.setOnClickListener {
                 clickListener.onClick(item.uid)
+            }
+
+            binding.completionButton.setOnClickListener {
+                habitCompleteListener.onClick(item)
             }
         }
 
@@ -58,5 +66,9 @@ class HabitAdapter(private val clickListener: HabitListener) :
 
     class HabitListener(val clickListener: (habitId: String) -> Unit) {
         fun onClick(habitPosition: String) = clickListener(habitPosition)
+    }
+
+    class HabitCompleteListener(val clickListener: (habit: Habit) -> Unit) {
+        fun onClick(habit: Habit) = clickListener(habit)
     }
 }
