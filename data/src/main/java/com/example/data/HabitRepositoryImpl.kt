@@ -3,6 +3,7 @@ package com.example.data
 import com.example.data.database.*
 import com.example.data.network.HabitApiService
 import com.example.data.network.HabitDone
+import com.example.data.network.Uid
 import com.example.data.network.asDatabaseModel
 import com.example.domain.Habit
 import com.example.domain.HabitRepository
@@ -48,7 +49,7 @@ class HabitRepositoryImpl(
 
     override suspend fun deleteHabit(habit: Habit) {
         withContext(Dispatchers.IO) {
-            habitApi.deleteHabit(webToken, habit.uid)
+            habitApi.deleteHabitAsync(webToken, Uid(habit.uid))
             localDatabase.delete(habit.asDbModel())
         }
     }
@@ -63,5 +64,4 @@ class HabitRepositoryImpl(
             habitApi.completeHabitAsync(webToken, habitDone)
         }
     }
-
 }

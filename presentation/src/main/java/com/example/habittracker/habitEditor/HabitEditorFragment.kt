@@ -43,12 +43,15 @@ class HabitEditorFragment : Fragment() {
         val args = requireArguments()
         val uid: String?
 
-        uid = if (args.containsKey(HABIT_INDEX))
-            args.getString(HABIT_INDEX)
-        else
-            null
+        if (args.containsKey(HABIT_INDEX)) {
+            uid = args.getString(HABIT_INDEX)
+            binding.deleteButton.visibility = View.VISIBLE
+        } else {
+            uid = null
+            binding.deleteButton.visibility = View.GONE
+        }
 
-        val viewModelFactory = HabitEditorViewModelFactory(habitInteractor,uid)
+        val viewModelFactory = HabitEditorViewModelFactory(habitInteractor, uid)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HabitEditorViewModel::class.java)
         binding.viewModel = viewModel
 

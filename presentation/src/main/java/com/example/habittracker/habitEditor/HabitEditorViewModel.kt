@@ -7,9 +7,8 @@ import com.example.domain.Habit
 import com.example.domain.HabitInteractor
 import kotlinx.coroutines.*
 import java.util.*
-import kotlin.time.days
 
-class HabitEditorViewModel(private val processingService: HabitInteractor, uid: String? = null) :
+class HabitEditorViewModel(private val habitInteractor: HabitInteractor, uid: String? = null) :
     ViewModel() {
     var currentHabit: Habit
         private set
@@ -20,7 +19,7 @@ class HabitEditorViewModel(private val processingService: HabitInteractor, uid: 
 
     init {
         if (uid != null) {
-            currentHabit = processingService.getHabit(uid)
+            currentHabit = habitInteractor.getHabit(uid)
             isNewHabit = false
         } else
             currentHabit = Habit()
@@ -35,10 +34,19 @@ class HabitEditorViewModel(private val processingService: HabitInteractor, uid: 
         uiScope.launch {
             currentHabit.date = (Date().time / 1000).toInt()
             if (isNewHabit)
-                processingService.addHabit(currentHabit)
+                habitInteractor.addHabit(currentHabit)
             else
-                processingService.updateHabit(currentHabit)
+                habitInteractor.updateHabit(currentHabit)
             _navigateToHabitList.value = true
+        }
+    }
+
+    fun deleteButtonClicked() {
+        uiScope.launch {
+            if (!isNewHabit) {
+                habitInteractor.deleteHabit(currentHabit)
+                _navigateToHabitList.value = true
+            }
         }
     }
 
