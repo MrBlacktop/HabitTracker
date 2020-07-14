@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">HabitTracker</string>
     <string name="habit_name">Habit name</string>
     <string name="description">Description</string>
@@ -25,7 +25,7 @@
     <string name="habit_list">Habit list</string>
     <string name="filters_and_sorts">Filters and sorts</string>
     <string name="search">Search</string>
-    <string name="webToken">9b154c53-2ef2-4e9d-9a93-16b3d9218a59</string>
+    <string name="webToken" tools:ignore="TypographyDashes">9b154c53-2ef2-4e9d-9a93-16b3d9218a59</string>
     <string name="days">Days</string>
     <string name="repeat">Repeat</string>
     <string name="in">In</string>
@@ -37,6 +37,7 @@
     <string name="good_habit_complete">You are breathtaking!</string>
     <string name="complete">Complete</string>
     <string name="delete">Delete</string>
+    <string name="times">times</string>
 </resources>
 
 
