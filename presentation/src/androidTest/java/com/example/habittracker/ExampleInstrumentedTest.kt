@@ -1,12 +1,13 @@
 package com.example.habittracker
 
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -16,9 +17,8 @@ import org.junit.Assert.*
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.habittracker", appContext.packageName)
+    fun aboutFragmentTest(){
+        launchFragmentInContainer<AboutFragment>()
+        onView(withId(R.id.aboutTextView)).check(matches(withText("This is habits tracker :)")))
     }
 }
