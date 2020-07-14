@@ -9,5 +9,7 @@ data class Habit(
     var count: Int = 0,
     var frequency: Int = 0,
     var color: Int = 0,
-    var date: Int = 0
+    var date: Int = 0,
+    var habitDoneCount: Int = 0,
+    var isComplete: Boolean = false
 )

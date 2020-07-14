@@ -14,7 +14,7 @@ import com.example.domain.Priority
 @TypeConverters(HabitTypeConverter::class, HabitPriorityConverter::class)
 data class HabitDbModel(
     @PrimaryKey
-    var uid: String ="",
+    var uid: String = "",
     var title: String = "",
     var description: String = "",
     var priority: Priority = Priority.High,
@@ -22,7 +22,9 @@ data class HabitDbModel(
     var count: Int = 0,
     var frequency: Int = 0,
     var color: Int = 0,
-    var date: Int = 0
+    var date: Int = 0,
+    var habitDoneCount: Int = 0,
+    var isComplete: Boolean = false
 )
 
 class HabitTypeConverter {
@@ -77,15 +79,17 @@ fun HabitDbModel.asDomainModel(): Habit {
         priority = this.priority,
         title = this.title,
         type = this.type,
-        uid = this.uid
+        uid = this.uid,
+        habitDoneCount = this.habitDoneCount,
+        isComplete = this.isComplete
     )
 }
 
-fun List<HabitDbModel>.asDomainModel(): List<Habit>{
+fun List<HabitDbModel>.asDomainModel(): List<Habit> {
     return map { it.asDomainModel() }
 }
 
-fun Habit.asDbModel(): HabitDbModel{
+fun Habit.asDbModel(): HabitDbModel {
     return HabitDbModel(
         uid = this.uid,
         title = this.title,
@@ -95,6 +99,8 @@ fun Habit.asDbModel(): HabitDbModel{
         count = this.count,
         frequency = this.frequency,
         color = this.color,
-        date = this.date
+        date = this.date,
+        habitDoneCount = this.habitDoneCount,
+        isComplete = this.isComplete
     )
 }

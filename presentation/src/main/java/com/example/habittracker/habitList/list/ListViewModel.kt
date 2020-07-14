@@ -7,12 +7,14 @@ import androidx.lifecycle.asLiveData
 import com.example.domain.Habit
 import com.example.domain.HabitInteractor
 import com.example.domain.HabitType
+import com.example.habittracker.R
+import kotlinx.android.synthetic.main.list_item_habit.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class ListViewModel(private val processingService: HabitInteractor) : ViewModel() {
+class ListViewModel(private val habitInteractor: HabitInteractor) : ViewModel() {
 
     val textSort = MutableLiveData<String>()
 
@@ -30,7 +32,7 @@ class ListViewModel(private val processingService: HabitInteractor) : ViewModel(
         increaseSort.value = true
     }
 
-    val habits = processingService.getHabits().asLiveData()
+    val habits = habitInteractor.getHabits().asLiveData()
 
 
     fun getFilteredHabits(habitType: HabitType): List<Habit> {
@@ -51,7 +53,7 @@ class ListViewModel(private val processingService: HabitInteractor) : ViewModel(
     private fun synchronize() {
         uiScope.launch {
             try {
-                processingService.synchronize()
+                habitInteractor.synchronize()
                 _eventNetworkError.value = false
             } catch (networkException: IOException) {
                 _eventNetworkError.value = true
@@ -63,11 +65,18 @@ class ListViewModel(private val processingService: HabitInteractor) : ViewModel(
     fun deleteHabit(habit: Habit) {
         uiScope.launch {
             try {
-                processingService.deleteHabit(habit)
+                habitInteractor.deleteHabit(habit)
                 _eventNetworkError.value = false
             } catch (networkException: IOException) {
                 _eventNetworkError.value = true
             }
+        }
+    }
+
+
+    fun habitCompleteButtonClicked(habit: Habit){
+        uiScope.launch {
+            habitInteractor.completeHabit(habit)
         }
     }
 }

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.Habit
 import com.example.domain.HabitType
 import com.example.habittracker.HabitTrackerApplication
 import com.example.habittracker.R
@@ -43,14 +44,22 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter =
-            HabitAdapter(
-                HabitAdapter.HabitListener {
-                    this.findNavController().navigate(
-                        R.id.action_habitListFragment_to_habitFragment,
-                        HabitEditorFragment.createBundleWithIndex(it)
-                    )
-                })
+        val habitOnClick: (habitId: String) -> Unit = {
+            this.findNavController().navigate(
+                R.id.action_habitListFragment_to_habitFragment,
+                HabitEditorFragment.createBundleWithIndex(it)
+            )
+        }
+        val habitCompleteButtonOnClick: (habit: Habit) -> Unit = {
+            viewModel.habitCompleteButtonClicked(it)
+            val toastMessage = getHabitCompleteToastMessage(it)
+            Toast.makeText(context,toastMessage,Toast.LENGTH_SHORT).show()
+        }
+
+        val adapter = HabitAdapter(
+            HabitAdapter.HabitListener(habitOnClick),
+            HabitAdapter.HabitCompleteListener(habitCompleteButtonOnClick)
+        )
 
         habitList.adapter = adapter
         habitList.layoutManager = LinearLayoutManager(context)
@@ -83,6 +92,27 @@ class ListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list, container, false)
+    }
+
+    private fun getHabitCompleteToastMessage(habit: Habit): String {
+        if (habitsType == HabitType.Bad) {
+            return if (habit.isComplete)
+                getString(R.string.bad_habit_complete)
+            else
+                getString(
+                    R.string.bad_habit_is_not_yet_complete,
+                    habit.count - habit.habitDoneCount
+                )
+        } else {
+            return if (habit.isComplete)
+                getString(R.string.good_habit_complete)
+            else
+                getString(
+                    R.string.good_habit_is_not_yet_complete,
+                    habit.count - habit.habitDoneCount
+                )
+        }
+
     }
 
     companion object {

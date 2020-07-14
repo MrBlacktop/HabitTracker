@@ -15,5 +15,8 @@ interface HabitApiService {
     fun updateHabitAsync(@Header("Authorization") token: String, @Body habit:HabitWebModel): Deferred<Uid>
 
     @HTTP(method = "DELETE",path = "habit", hasBody = true)
-    fun deleteHabit(@Header("Authorization") token: String, @Body uid: String)
+    fun deleteHabitAsync(@Header("Authorization") token: String, @Body uid: Uid): Deferred<Respond?>
+
+    @POST("habit_done")
+    fun completeHabitAsync(@Header("Authorization") token: String, @Body habitDone: HabitDone): Deferred<Respond?>
 }
