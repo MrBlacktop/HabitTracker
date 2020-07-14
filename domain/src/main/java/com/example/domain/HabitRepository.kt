@@ -16,4 +16,6 @@ interface HabitRepository {
     fun getHabit(uid: String): Habit
 
     suspend fun completeHabit(habit: Habit)
+
+    suspend fun updateHabitInDb(habit: Habit)
 }

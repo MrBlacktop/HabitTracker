@@ -8,8 +8,7 @@ import com.example.data.network.asDatabaseModel
 import com.example.domain.Habit
 import com.example.domain.HabitRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import javax.inject.Singleton
 
@@ -25,8 +24,21 @@ class HabitRepositoryImpl(
 
     override suspend fun synchronize() {
         withContext(Dispatchers.IO) {
-            val habits = habitApi.getHabitsAsync(webToken).await()
-            localDatabase.insertAll(habits.asDatabaseModel())
+            val habits = habitApi.getHabitsAsync(webToken).await().asDatabaseModel()
+            val dbHabits = localDatabase.getAllHabits().toList().first()
+            val dbHabitsUids = dbHabits.map { it.uid }
+
+            val (habitsToUpdate, habitsToInsert) = habits.partition { dbHabitsUids.contains(it.uid) }
+            localDatabase.insertAll(habitsToInsert)
+
+            for (habitToUpdate in habitsToUpdate) {
+                val dbHabit = dbHabits.first { it.uid == habitToUpdate.uid }
+                habitToUpdate.apply {
+                    isComplete = dbHabit.isComplete
+                    habitDoneCount = dbHabit.habitDoneCount
+                }
+                localDatabase.update(habitToUpdate)
+            }
         }
     }
 
@@ -59,9 +71,15 @@ class HabitRepositoryImpl(
     }
 
     override suspend fun completeHabit(habit: Habit) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             val habitDone = HabitDone(habit.date, habit.uid)
             habitApi.completeHabitAsync(webToken, habitDone)
+        }
+    }
+
+    override suspend fun updateHabitInDb(habit: Habit) {
+        withContext(Dispatchers.IO){
+            localDatabase.update(habit.asDbModel())
         }
     }
 }

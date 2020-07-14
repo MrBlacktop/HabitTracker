@@ -16,22 +16,20 @@ class HabitInteractor @Inject constructor(private val repository: HabitRepositor
         habit.habitDoneCount++
 
         if (isHabitExpire(habit)) {
-            habitExpired(habit)
+            habit.apply {
+                habitDoneCount = 1
+                date = (Date().time / 1000).toInt()
+                isComplete = false
+            }
             return
         }
 
         if (habit.habitDoneCount == habit.count)
             habitComplete(habit)
+
+        repository.updateHabitInDb(habit)
     }
 
-    private suspend fun habitExpired(habit: Habit) {
-        habit.apply {
-            habitDoneCount = 1
-            date = (Date().time / 1000).toInt()
-            isComplete = false
-        }
-        updateHabit(habit)
-    }
 
     private suspend fun habitComplete(habit: Habit) {
         habit.isComplete = true

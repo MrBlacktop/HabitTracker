@@ -24,4 +24,5 @@ interface HabitDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(habits: List<HabitDbModel>)
 
+
 }
