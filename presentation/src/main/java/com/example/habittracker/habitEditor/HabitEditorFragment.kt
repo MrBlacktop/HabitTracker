@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -76,6 +77,15 @@ class HabitEditorFragment : Fragment() {
             if (it == true) {
                 this.findNavController().navigate(R.id.action_habitFragment_to_habitListFragment)
                 viewModel.doneNavigating()
+            }
+        })
+
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if(it){
+                    Toast.makeText(context,getText(R.string.network_error),Toast.LENGTH_LONG).show()
+                    viewModel.doneEventNetworkError()
+                }
             }
         })
 

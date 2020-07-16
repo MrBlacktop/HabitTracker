@@ -1,5 +1,6 @@
 package com.example.habittracker.habitEditor
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,31 +30,46 @@ class HabitEditorViewModel(private val habitInteractor: HabitInteractor, uid: St
     val navigateToHabitList: LiveData<Boolean?>
         get() = _navigateToHabitList
 
+    private val _eventNetworkError = MutableLiveData<Boolean>()
+    val eventNetworkError: LiveData<Boolean>
+        get() = _eventNetworkError
+
 
     fun saveButtonClicked() {
         uiScope.launch {
-            currentHabit.date = (Date().time / 1000).toInt()
-            if (isNewHabit)
-                habitInteractor.addHabit(currentHabit)
-            else
-                habitInteractor.updateHabit(currentHabit)
-            _navigateToHabitList.value = true
+            try {
+                currentHabit.date = (Date().time / 1000).toInt()
+                if (isNewHabit)
+                    habitInteractor.addHabit(currentHabit)
+                else
+                    habitInteractor.updateHabit(currentHabit)
+                _navigateToHabitList.value = true
+            } catch (e: Exception) {
+                Log.e("HabitEditorViewModel", e.message ?: "Unknown exception")
+                _eventNetworkError.value = true
+            }
         }
     }
 
     fun deleteButtonClicked() {
         uiScope.launch {
-            if (!isNewHabit) {
-                habitInteractor.deleteHabit(currentHabit)
-                _navigateToHabitList.value = true
+            try {
+                if (!isNewHabit) {
+                    habitInteractor.deleteHabit(currentHabit)
+                    _navigateToHabitList.value = true
+                }
+            } catch (e: Exception) {
+                Log.e("HabitEditorViewModel", e.message ?: "Unknown exception")
+                _eventNetworkError.value = true
             }
         }
     }
-
 
     fun doneNavigating() {
         _navigateToHabitList.value = null
     }
 
-
+    fun doneEventNetworkError(){
+        _eventNetworkError.value = null
+    }
 }

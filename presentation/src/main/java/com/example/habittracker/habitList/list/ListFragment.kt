@@ -80,7 +80,7 @@ class ListFragment : Fragment() {
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
             if (it)
-                Toast.makeText(context, "Network Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getText(R.string.network_error), Toast.LENGTH_SHORT).show()
         })
 
 
